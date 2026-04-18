@@ -1,0 +1,149 @@
+/* Pricing Section */
+.pricing-section {
+  background: #020617;
+  color: #e5e7eb;
+  padding: 80px 40px;
+  border-top: 1px solid #1e293b;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pricing-header h2 {
+  font-size: 42px;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.pricing-header p {
+  color: #94a3b8;
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.pricing-card {
+  background: #0f172a;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.pricing-card.featured {
+  border-color: #22c55e;
+  transform: scale(1.05);
+  box-shadow: 0 16px 40px rgba(34, 197, 94, 0.15);
+}
+
+.pricing-card:hover {
+  border-color: #22c55e;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(34, 197, 94, 0.1);
+}
+
+.pricing-card.featured:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: #22c55e;
+  color: #020617;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pricing-card h3 {
+  font-size: 20px;
+  margin: 16px 0 24px 0;
+  color: #e5e7eb;
+}
+
+.price {
+  font-size: 48px;
+  font-weight: 700;
+  color: #22c55e;
+  margin: 24px 0;
+}
+
+.price span {
+  font-size: 16px;
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+
+.pricing-features li {
+  padding: 12px 0;
+  color: #94a3b8;
+  font-size: 14px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.pricing-features li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-card.featured {
+    transform: scale(1);
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-section {
+    padding: 60px 20px;
+  }
+
+  .pricing-header h2 {
+    font-size: 32px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card.featured {
+    grid-column: auto;
+    transform: scale(1);
+  }
+
+  .pricing-card.featured:hover {
+    transform: translateY(-8px);
+  }
+
+  .price {
+    font-size: 36px;
+  }
+}

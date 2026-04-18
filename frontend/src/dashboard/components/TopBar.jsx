@@ -1,0 +1,24 @@
+import React from "react";
+import Menu from "./Menu"; 
+
+const TopBar = ()=>{
+    return(
+        <div className="topbar-container">
+            <div className="indices-container">
+                <div className="nifty">
+                    <p className="index">Nifty</p>
+                    <p className="index-points">{100.2}</p>
+                    <p className="change"></p>
+                </div>
+                <div className="sensex">
+                    <p className="index">Sensex</p>
+                    <p className="index-points">{100.2}</p>
+                    <p className="change"></p>
+                </div>
+            </div>
+            <Menu/>
+        </div>
+    );
+}
+
+export default TopBar;

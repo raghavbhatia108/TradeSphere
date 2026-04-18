@@ -1,0 +1,58 @@
+/* Products Hero */
+.products-hero {
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #e5e7eb;
+  padding: 100px 40px;
+  text-align: center;
+  border-bottom: 1px solid #1e293b;
+}
+
+.products-hero-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.products-hero h1 {
+  font-size: 48px;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.products-hero p {
+  font-size: 20px;
+  color: #94a3b8;
+  margin: 0 0 32px 0;
+}
+
+.cta-primary {
+  display: inline-block;
+  background: #22c55e;
+  color: #020617;
+  text-decoration: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid #22c55e;
+}
+
+.cta-primary:hover {
+  background: #16a34a;
+  border-color: #16a34a;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .products-hero {
+    padding: 60px 20px;
+  }
+
+  .products-hero h1 {
+    font-size: 32px;
+  }
+
+  .products-hero p {
+    font-size: 16px;
+  }
+}

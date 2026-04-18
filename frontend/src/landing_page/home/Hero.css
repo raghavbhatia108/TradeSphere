@@ -1,0 +1,107 @@
+.hero {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 80px 40px;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-left h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero-left p {
+  font-size: 18px;
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+.hero-buttons button {
+  margin-right: 15px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: #22c55e;
+  color: black;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+}
+
+/* RIGHT SIDE MOCK */
+.hero-right {
+  flex: 1;
+}
+
+.dashboard-mock {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.mock-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #64748b;
+  margin-left: 5px;
+  border-radius: 50%;
+}
+
+.mock-body {
+  display: flex;
+  gap: 10px;
+}
+
+.watchlist, .chart, .orders {
+  background: #0f172a;
+  padding: 10px;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.green {
+  color: #22c55e;
+}
+
+.red {
+  color: #ef4444;
+}
+
+.chart-line {
+  height: 60px;
+  background: linear-gradient(90deg, #22c55e, transparent);
+  border-radius: 6px;
+}
+
+.order-card {
+  background: #1e293b;
+  margin-top: 5px;
+  padding: 6px;
+  border-radius: 6px;
+}

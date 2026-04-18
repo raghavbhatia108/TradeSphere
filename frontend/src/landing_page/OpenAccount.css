@@ -1,0 +1,67 @@
+/* Open Account Section */
+.open-account-section {
+  color: white;
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.open-account-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.open-account-section h1 {
+  font-size: 42px;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.open-account-section p {
+  font-size: 18px;
+  margin: 0 0 40px 0;
+  opacity: 0.95;
+}
+
+.signup-btn {
+  background: white;
+  color: #22c55e;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background-color: #22c55e;
+  color: white;
+}
+
+.signup-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .open-account-section {
+    padding: 60px 20px;
+  }
+
+  .open-account-section h1 {
+    font-size: 32px;
+  }
+
+  .open-account-section p {
+    font-size: 16px;
+  }
+
+  .signup-btn {
+    padding: 12px 32px;
+    font-size: 14px;
+  }
+}

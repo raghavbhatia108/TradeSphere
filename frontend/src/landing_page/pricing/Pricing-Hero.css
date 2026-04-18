@@ -1,0 +1,93 @@
+/* Pricing Hero Section */
+.pricing-hero-section {
+  background: #020617;
+  color: #e5e7eb;
+  padding: 80px 40px;
+  border-bottom: 1px solid #1e293b;
+  
+}
+
+.pricing-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pricing-hero-container h1 {
+  font-size: 48px;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.pricing-hero-container p {
+  font-size: 20px;
+  color: #94a3b8;
+  margin: 0 0 60px 0;
+}
+
+/* Pricing Highlights */
+.pricing-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.highlight-box {
+  background: #0f172a;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  transition: all 0.3s ease;
+}
+
+.highlight-box:hover {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.05);
+  transform: translateY(-4px);
+}
+
+.highlight-box h3 {
+  font-size: 18px;
+  margin: 0 0 12px 0;
+  color: #e5e7eb;
+}
+
+.highlight-box .price {
+  font-size: 36px;
+  font-weight: 700;
+  color: #22c55e;
+  margin: 12px 0;
+}
+
+.highlight-box p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pricing-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-hero-section {
+    padding: 60px 20px;
+  }
+
+  .pricing-hero-container h1 {
+    font-size: 32px;
+  }
+
+  .pricing-hero-container p {
+    font-size: 16px;
+  }
+
+  .pricing-highlights {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
