@@ -361,6 +361,9 @@
   .stat-value {
     font-size: 20px;
   }
+  .asset-card{
+    width: 90vw;
+  }
 
   .api-section {
     padding: 16px;

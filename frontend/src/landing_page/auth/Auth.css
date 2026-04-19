@@ -164,6 +164,7 @@
 @media (max-width: 768px) {
   .auth-container {
     flex-direction: column;
+    background: none;
   }
 
   .auth-left {
@@ -176,7 +177,18 @@
   }
 
   .auth-right {
-    display: none;
+    display: block;
+    flex: 1;
+    height: 100px;
+    order: 2;
+    background: none;
+  }
+  .auth-right img{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    height: 400px;
+    text-align: center;
   }
 
   .auth-title {
