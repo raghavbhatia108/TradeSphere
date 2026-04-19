@@ -36,7 +36,7 @@ const activeMenuClass="menu selected"
                     </li>
                      <li>
                         <Link style={{textDecoration:'none'}} to="/holdings" onClick={()=>handleMenuClick(2)}>
-                                    <p className={selectedMenu===2?activeMenuClass:menuClass}>Holdings</p>
+                                    <p className={selectedMenu===2?activeMenuClass:menuClass}>Portfolio</p>
                         </Link>
                     </li>
                      <li>

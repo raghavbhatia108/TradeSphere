@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
 import { setAuth } from '../../utils/auth';
+import { toast } from 'react-toastify';
 import './Auth.css';
 
 const Login = () => {
@@ -15,10 +16,11 @@ const Login = () => {
           {email, password}
       );
       setAuth(res.data.token, res.data.user);
+      toast.success("Login successful!");
       navigate("/dashboard");
     }
     catch(error){
-      alert(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "Login failed");
     }
   }
 
@@ -53,16 +55,9 @@ const Login = () => {
         </div>
       </div>
       <div className="auth-right bearish">
-        <div className="bear-silhouette"></div>
-        <div className="chart-lines"></div>
-        <div className="candlesticks">
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
+      <img src='/media/images/ill2.png' height={800}/>
+        
         </div>
-      </div>
     </div>
   );
 }

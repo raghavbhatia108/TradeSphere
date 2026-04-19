@@ -26,20 +26,54 @@ app.get("/allHoldings", authMiddleware,async(req, res)=>{
     res.json(allHoldings);
 });
 
-app.get("/allPositions",authMiddleware, async(req, res)=>{
-    let allPositions = await PositionsModel.find();
-    res.json(allPositions);
+app.get("/allOrders",authMiddleware, async(req, res)=>{
+    let allOrders = await OrdersModel.find();
+    res.json(allOrders);
 });
 
 app.post("/newOrder", authMiddleware, async(req,res)=>{
+    let {name, qty, price, mode} = req.body;
+    qty = parseFloat(qty);
+    price = parseFloat(price);
+
+    // Save the order
     let newOrder = new OrdersModel({
-         name:req.body.name,
-    qty:req.body.qty,
-    price:req.body.price,
-    mode:req.body.mode,
-    })
-    newOrder.save();
-    res.send("order saved");
+         name,
+         qty: qty.toString(),
+         price: price.toString(),
+         mode,
+    });
+    await newOrder.save();
+
+    // Update positions if BUY
+    if (mode.toUpperCase() === "BUY") {
+        let existingPosition = await PositionsModel.findOne({ name });
+        if (existingPosition) {
+            // Update existing position: recalculate avg price
+            let totalQty = existingPosition.qty + qty;
+            let totalValue = (existingPosition.avg * existingPosition.qty) + (price * qty);
+            let newAvg = totalValue / totalQty;
+            existingPosition.qty = totalQty;
+            existingPosition.avg = newAvg;
+            existingPosition.price = price; // Update current price
+            await existingPosition.save();
+        } else {
+            // Create new position
+            let newPosition = new PositionsModel({
+                product: "CASH",
+                name,
+                qty,
+                avg: price,
+                price,
+                net: "0%",
+                day: "0%",
+                isLoss: false,
+            });
+            await newPosition.save();
+        }
+    }
+
+    res.send("Order placed and positions updated");
 });
 
 app.listen(PORT, ()=>{

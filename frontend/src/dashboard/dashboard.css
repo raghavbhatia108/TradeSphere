@@ -1,29 +1,27 @@
 ﻿.dashboard-root {
   min-height: 100vh;
-  background: #020617;
-  color: #e5e7eb;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: transparent;
+  color: var(--text);
 }
 
 .dashboard-main {
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  grid-template-rows: 1fr 340px;
-  gap: 16px;
-  padding: 24px;
+  grid-template-columns: 280px minmax(0, 1.25fr);
+  grid-template-rows: auto 1fr;
+  gap: 22px;
+  padding: 32px;
   min-height: 100vh;
   box-sizing: border-box;
 }
 
 .panel {
-  background: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-soft);
 }
 
 .section-header,
@@ -33,42 +31,70 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 20px;
-  border-bottom: 1px solid #151b2d;
+  padding: 28px 30px;
+  max-height: 15vh;
 }
 
 .section-label,
 .stock-label {
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--muted);
   margin: 0;
 }
 
 .section-title,
 .stock-name {
   margin: 6px 0 0;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--text);
 }
 
 .section-tag {
-  color: #94a3b8;
-  background: rgba(147, 197, 253, 0.08);
-  padding: 6px 12px;
+  color: var(--text);
+  background: rgba(34, 197, 94, 0.12);
+  padding: 8px 14px;
   border-radius: 999px;
   font-size: 12px;
 }
 
+.asset-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 24px 18px;
+}
+
+.asset-filter-button {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.asset-filter-button.active,
+.asset-filter-button:hover {
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(34, 197, 94, 0.14);
+  color: var(--text);
+}
+
 .watchlist-panel {
   position: relative;
+  max-height: 70vh;
+ scrollbar-width: none;
 }
 
 .watchlist-items {
   overflow-y: auto;
   flex: 1;
+  scrollbar-width: none;
 }
 
 .watch-item {
@@ -76,19 +102,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
-  background: transparent;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.02);
   border: none;
-  border-bottom: 1px solid #151b2d;
-  color: #e5e7eb;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+  color: var(--text);
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.25s ease, transform 0.25s ease;
 }
 
 .watch-item:hover,
 .watch-item.active {
-  background: rgba(34, 197, 94, 0.1);
+  background: rgba(34, 197, 94, 0.11);
+  transform: translateX(1px);
 }
 
 .watch-symbol {
@@ -99,7 +126,7 @@
 
 .watch-meta {
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--muted);
   margin: 0;
 }
 
@@ -112,117 +139,100 @@
 .watch-change.green,
 .stock-change.positive,
 .positive {
-  color: #22c55e;
+  color: var(--positive);
 }
 
 .watch-change.red,
 .stock-change.negative,
 .negative {
-  color: #ef4444;
+  color: var(--negative);
 }
 
 .chart-panel {
   display: flex;
   flex-direction: column;
+  max-height: 70vh;
 }
 
 .stock-details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .stock-summary {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 12px;
+  gap: 14px;
 }
 
 .stock-price {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--text);
 }
 
 .stock-change {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .trade-panel {
-  width: 260px;
-  display: grid;
-  gap: 12px;
-  padding: 20px;
-  border-radius: 14px;
-  background: #111827;
-  border: 1px solid #1e293b;
-}
-
-.trade-header {
-  font-size: 13px;
-  text-transform: uppercase;
-  color: #94a3b8;
-  letter-spacing: 0.14em;
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px 24px;
+  width: 100%;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  width: 70%;
 }
 
 .trade-label {
   display: grid;
-  gap: 8px;
-  color: #cbd5e1;
+  gap: 10px;
+  color: var(--muted);
   font-size: 13px;
+  flex: 1;
 }
 
 .trade-input {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #1e293b;
-  background: #020617;
-  color: #e5e7eb;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(2, 6, 23, 0.95);
+  color: var(--text);
   font-size: 14px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.trade-input:focus {
-  outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
 }
 
 .trade-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  flex: 1;
 }
 
 .trade-button {
   flex: 1;
-  padding: 12px 0;
-  border: none;
-  border-radius: 10px;
+  padding: 14px 0;
+  border-radius: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
 }
 
 .trade-button.buy {
-  background: #22c55e;
+  background: var(--positive);
   color: #020617;
 }
 
 .trade-button.sell {
-  background: #ef4444;
-  color: #ffffff;
+  background: var(--negative);
+  color: #fff;
 }
 
 .trade-button:hover {
-  transform: translateY(-1px);
-}
-
-.trade-status {
-  font-size: 13px;
-  color: #94a3b8;
-  min-height: 18px;
+  transform: translateY(-2px);
 }
 
 .chart-container {
@@ -250,43 +260,45 @@
   flex: 1;
   padding: 18px 22px;
   border: none;
-  background: #020617;
-  color: #94a3b8;
+  background: rgba(2, 6, 23, 0.96);
+  color: var(--muted);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .tab-button.active {
-  color: #f8fafc;
-  background: #111827;
-  border-bottom: 3px solid #22c55e;
+  color: var(--text);
+  background: rgba(15, 23, 42, 0.98);
+  border-bottom: 3px solid var(--positive);
 }
 
 .tab-content {
   flex: 1;
-  padding: 20px;
+  padding: 22px;
   overflow: auto;
 }
 
 .data-table {
   width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
 }
 
 .data-table th,
 .data-table td {
   text-align: left;
-  padding: 14px 16px;
-  border-bottom: 1px solid #151b2d;
-  color: #cbd5e1;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--muted);
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .data-table th {
-  color: #94a3b8;
-  font-weight: 600;
+  color: rgba(148, 163, 184, 0.95);
+  font-weight: 700;
 }
 
 .data-table tr:hover {
@@ -295,7 +307,7 @@
 
 .empty-state {
   padding: 40px 20px;
-  color: #94a3b8;
+  color: var(--muted);
   text-align: center;
 }
 
@@ -303,12 +315,13 @@
   .dashboard-main {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    padding: 16px;
+    padding: 24px;
   }
 
-  .chart-header {
-    flex-direction: column;
-    align-items: stretch;
+  .section-header,
+  .chart-header,
+  .tab-content {
+    padding: 20px;
   }
 
   .trade-panel {
@@ -316,10 +329,10 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .dashboard-main {
-    gap: 12px;
-    padding: 12px;
+    gap: 16px;
+    padding: 16px;
   }
 
   .section-header,
@@ -328,11 +341,41 @@
     padding: 16px;
   }
 
+  .asset-filters {
+    justify-content: center;
+  }
+
   .watch-item {
-    padding: 14px 16px;
+    padding: 16px 18px;
   }
 
   .stock-price {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .trade-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trade-actions {
+    flex-direction: column;
+  }
+
+  .chart-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 540px) {
+  .tab-button {
+    padding: 16px 14px;
+    font-size: 13px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 14px;
+    font-size: 13px;
   }
 }

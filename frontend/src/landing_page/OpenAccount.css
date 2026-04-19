@@ -23,6 +23,7 @@
 }
 
 .signup-btn {
+  text-decoration: none;
   background: white;
   color: #22c55e;
   padding: 14px 40px;

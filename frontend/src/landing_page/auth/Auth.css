@@ -3,8 +3,9 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
-  background: #020617;
   animation: fadeIn 0.8s ease-in-out;
+  background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 20%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.96), rgba(15, 23, 42, 0.96));
 }
 
 @keyframes fadeIn {
@@ -14,42 +15,43 @@
 
 .auth-left {
   flex: 0 0 45%;
-  background: #020617;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 48px;
   position: relative;
+  background: rgba(2, 6, 23, 0.98);
 }
 
 .auth-left::after {
   content: '';
   position: absolute;
   right: 0;
-  top: 0;
-  bottom: 0;
+  top: 20px;
+  bottom: 20px;
   width: 1px;
-  background: linear-gradient(to bottom, transparent, #1e293b, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(148, 163, 184, 0.25), transparent);
 }
 
 .auth-form-container {
-  max-width: 400px;
+  max-width: 420px;
   width: 100%;
 }
 
 .auth-title {
-  font-size: 32px;
+  font-size: clamp(2.2rem, 3vw, 3rem);
   font-weight: 700;
-  color: #e5e7eb;
-  margin-bottom: 8px;
+  color: var(--text);
+  margin-bottom: 10px;
   text-align: left;
 }
 
 .auth-subtitle {
-  font-size: 16px;
-  color: #94a3b8;
-  margin-bottom: 40px;
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 36px;
   text-align: left;
+  line-height: 1.75;
 }
 
 .auth-form {
@@ -61,19 +63,17 @@
 .auth-input {
   width: 100%;
   padding: 16px 20px;
-  background: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 8px;
-  color: #e5e7eb;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  color: var(--text);
   font-size: 16px;
-  transition: all 0.3s ease;
 }
 
 .auth-input:focus {
   outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
-  background: #1e293b;
+  border-color: var(--positive);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
 }
 
 .auth-input::placeholder {
@@ -83,21 +83,21 @@
 .auth-button {
   width: 100%;
   padding: 16px 20px;
-  background: #22c55e;
+  background: var(--positive);
   color: #020617;
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   margin-top: 8px;
+  box-shadow: 0 18px 36px rgba(34, 197, 94, 0.18);
 }
 
 .auth-button:hover {
   background: #16a34a;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
 
 .auth-button:active {
@@ -124,11 +124,9 @@
 
 .auth-right {
   flex: 0 0 55%;
-  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   overflow: hidden;
 }
 
@@ -139,151 +137,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 70%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 70% 30%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
+  
   pointer-events: none;
 }
 
-/* Bearish Theme (Login) */
-.bearish .bear-silhouette {
-  position: absolute;
-  width: 200px;
-  height: 150px;
-  background: linear-gradient(45deg, #ef4444, #dc2626);
-  clip-path: polygon(50% 0%, 60% 20%, 70% 30%, 80% 40%, 85% 60%, 80% 80%, 60% 90%, 40% 85%, 30% 70%, 25% 50%, 30% 30%, 40% 20%);
-  opacity: 0.8;
-  top: 30%;
-  left: 20%;
-  animation: float 6s ease-in-out infinite;
-}
 
-.bearish .chart-lines {
-  position: absolute;
-  bottom: 20%;
-  left: 10%;
-  width: 300px;
-  height: 100px;
-}
 
-.bearish .chart-lines::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #ef4444, transparent);
-  top: 50%;
-  clip-path: polygon(0% 50%, 20% 30%, 40% 40%, 60% 20%, 80% 35%, 100% 25%);
-}
 
-.bearish .candlesticks {
-  position: absolute;
-  bottom: 15%;
-  right: 15%;
-  display: flex;
-  gap: 8px;
-}
-
-.bearish .candlestick {
-  width: 4px;
-  height: 40px;
-  background: #ef4444;
-  position: relative;
-}
-
-.bearish .candlestick::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 2px;
-  background: #ef4444;
-}
-
-.bearish .candlestick::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 2px;
-  background: #ef4444;
-}
-
-/* Bullish Theme (Signup) */
-.bullish .bull-silhouette {
-  position: absolute;
-  width: 200px;
-  height: 150px;
-  background: linear-gradient(45deg, #22c55e, #16a34a);
-  clip-path: polygon(50% 0%, 40% 20%, 30% 30%, 20% 40%, 15% 60%, 20% 80%, 40% 90%, 60% 85%, 70% 70%, 75% 50%, 70% 30%, 60% 20%);
-  opacity: 0.8;
-  top: 30%;
-  right: 20%;
-  animation: float 6s ease-in-out infinite reverse;
-}
-
-.bullish .chart-lines {
-  position: absolute;
-  bottom: 20%;
-  right: 10%;
-  width: 300px;
-  height: 100px;
-}
-
-.bullish .chart-lines::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #22c55e, transparent);
-  top: 50%;
-  clip-path: polygon(0% 50%, 20% 70%, 40% 60%, 60% 80%, 80% 65%, 100% 75%);
-}
-
-.bullish .candlesticks {
-  position: absolute;
-  bottom: 15%;
-  left: 15%;
-  display: flex;
-  gap: 8px;
-}
-
-.bullish .candlestick {
-  width: 4px;
-  height: 40px;
-  background: #22c55e;
-  position: relative;
-}
-
-.bullish .candlestick::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 2px;
-  background: #22c55e;
-}
-
-.bullish .candlestick::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 2px;
-  background: #22c55e;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
 
 /* Grid Background */
 .auth-right::after {

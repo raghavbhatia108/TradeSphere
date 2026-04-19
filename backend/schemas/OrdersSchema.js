@@ -5,6 +5,8 @@ const OrdersSchema = new Schema({
     qty:String,
     price:String,
     mode:String,
+}, {
+    timestamps: true,
 })
 
 module.exports = {OrdersSchema};

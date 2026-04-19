@@ -5,7 +5,7 @@ import { watchlist } from "../data/data";
 import {BarChartOutlined, KeyboardArrowDown, KeyboardArrowUp, MoreHoriz} from "@mui/icons-material";
 import { DoughnutChart } from "./DoughnutChart";
 
-const labels= watchlist.map((subArray)=>subArray["name"]);
+const labels = watchlist.map((subArray) => subArray["symbol"]);
 const WatchList = () => {
   
   const data = {
@@ -13,7 +13,7 @@ const WatchList = () => {
   datasets: [
     {
       label: 'Price',
-      data: watchlist.map((stock)=>stock.price),
+      data: watchlist.map((stock) => stock.price),
       backgroundColor: [
         'rgba(255, 99, 132, 0.5)',
         'rgba(54, 162, 235, 0.5)',
@@ -42,7 +42,7 @@ const WatchList = () => {
           name="search"
           id="search"
           className="search"
-          placeholder="Search eg: Infy, bse, nifty weekly fut, gold mcx"
+          placeholder="Search eg: AAPL, EUR/USD, BTC/USD, S&P 500"
         />
         <span className="counts">{watchlist.length} / 50</span>
       </div>
@@ -74,7 +74,7 @@ const WatchlistItem = ({stock})=>{
             <div className="item">
                 <p className={stock.isDown?"down":"up"}>{stock.name}</p>
                 <div className="itemInfo">
-                    <span className="percent">{stock.percent}</span>
+                    <span className="percent">{stock.changePercent}</span>
                     {stock.isDown?(
                         <KeyboardArrowDown className="down"/>):
                         (<KeyboardArrowUp className="up"/>

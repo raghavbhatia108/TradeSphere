@@ -1,30 +1,4 @@
 
-//           </fieldset>
-//           <fieldset>
-//             <legend>price</legend>
-//             <input
-//               type="number"
-//               name="price"
-//               id="price"
-//               onChange={(e) => setStockPrice(e.target.value)}
-//               value={stockPrice}
-//             />
-//           </fieldset>
-//         </div>
-//       </div>
-//       <div className="buttons">
-//         <span>Margin required ₹140.65</span>
-//         <div>
-//             <Link className="btn btn-blue" onClick={handleBuyClick}>Buy</Link>
-//             <Link to="" className="btn btn-grey" onClick={handleCancelClick}>Cancel</Link>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BuyActionWindow;
-
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
@@ -91,7 +65,7 @@ const BuyActionWindow = ({ uid }) => {
         </div>
       </div>
       <div className="buttons">
-        <span>Margin required ₹140.65</span>
+        <span>Estimated margin $140.65</span>
         <div>
           <button className="btn btn-blue" onClick={handleBuyClick}>Buy</button>
           <button className="btn btn-grey" onClick={handleCancelClick}>Cancel</button>

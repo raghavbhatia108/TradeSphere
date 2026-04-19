@@ -2,20 +2,22 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import axios from "axios";
 import { getToken } from "../../utils/auth";
 import { watchlist as initialWatchlist } from "../data/data";
+import { toast } from "react-toastify";
 import "../dashboard.css";
 
-const symbolMap = {
-  INFY: "NSE:INFY",
-  ONGC: "NSE:ONGC",
-  TCS: "NSE:TCS",
-  KPITTECH: "NSE:KPITTECH",
-  QUICKHEAL: "NSE:QUICKHEAL",
-  WIPRO: "NSE:WIPRO",
-  "M&M": "NSE:MM",
-  RELIANCE: "NSE:RELIANCE",
-  HUL: "NSE:HUL",
-  SBIN: "NSE:SBIN",
-};
+const assetFilters = [
+  { id: "all", label: "All" },
+  { id: "stock", label: "Stocks" },
+  { id: "forex", label: "Forex" },
+  { id: "crypto", label: "Crypto" },
+];
+
+const formatUSD = (value) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 2,
+  }).format(Number(value) || 0);
 
 const WatchlistItem = React.memo(({ stock, active, onSelect }) => {
   return (
@@ -25,28 +27,40 @@ const WatchlistItem = React.memo(({ stock, active, onSelect }) => {
       onClick={onSelect}
     >
       <div>
-        <p className="watch-symbol">{stock.name}</p>
-        <p className="watch-meta">{stock.percent} • {stock.price.toFixed(2)}</p>
+        <p className="watch-symbol">{stock.symbol}</p>
+        <p className="watch-meta">{stock.name} • {formatUSD(stock.price)}</p>
       </div>
-      <span className={stock.isDown ? "watch-change red" : "watch-change green"}>{stock.percent}</span>
+      <span className={stock.isDown ? "watch-change red" : "watch-change green"}>{stock.changePercent}</span>
     </button>
   );
 });
 
 const Dashboards = () => {
   const [watchlist, setWatchlist] = useState(() => initialWatchlist.map((item) => ({ ...item })));
-  const [selectedSymbol, setSelectedSymbol] = useState(initialWatchlist[0]?.name || "");
+  const [assetFilter, setAssetFilter] = useState("all");
+  const [selectedSymbol, setSelectedSymbol] = useState(initialWatchlist[0]?.symbol || "");
   const [selectedStock, setSelectedStock] = useState(initialWatchlist[0] || null);
   const [positions, setPositions] = useState([]);
   const [history, setHistory] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [activeTab, setActiveTab] = useState("positions");
+  const [activeTab, setActiveTab] = useState("orders");
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(initialWatchlist[0]?.price || 0);
   const [status, setStatus] = useState("");
   const chartRef = useRef(null);
 
-  const symbolCode = useMemo(() => symbolMap[selectedSymbol] || `NSE:${selectedSymbol}`, [selectedSymbol]);
+  const filteredWatchlist = useMemo(
+    () =>
+      assetFilter === "all"
+        ? watchlist
+        : watchlist.filter((item) => item.type === assetFilter),
+    [assetFilter, watchlist]
+  );
+
+  const symbolCode = useMemo(
+    () => selectedStock?.chartSymbol || selectedStock?.symbol || "NASDAQ:AAPL",
+    [selectedStock]
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,7 +72,7 @@ const Dashboards = () => {
           return {
             ...stock,
             price: nextPrice,
-            percent: `${diff >= 0 ? "+" : ""}${diff.toFixed(2)}%`,
+            changePercent: `${diff >= 0 ? "+" : ""}${diff.toFixed(2)}%`,
             isDown: diff < 0,
           };
         })
@@ -69,10 +83,16 @@ const Dashboards = () => {
   }, []);
 
   useEffect(() => {
-    const current = watchlist.find((item) => item.name === selectedSymbol) || watchlist[0];
+    const current = watchlist.find((item) => item.symbol === selectedSymbol) || watchlist[0];
     setSelectedStock(current);
     setPrice(current?.price || 0);
   }, [selectedSymbol, watchlist]);
+
+  useEffect(() => {
+    if (!filteredWatchlist.some((item) => item.symbol === selectedSymbol)) {
+      setSelectedSymbol(filteredWatchlist[0]?.symbol || watchlist[0]?.symbol);
+    }
+  }, [filteredWatchlist, selectedSymbol, watchlist]);
 
   const fetchPositions = useCallback(async () => {
     try {
@@ -87,7 +107,7 @@ const Dashboards = () => {
 
   const fetchHistory = useCallback(async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/allHoldings`, {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/allOrders`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setHistory(res.data || []);
@@ -106,16 +126,19 @@ const Dashboards = () => {
       if (!chartRef.current || !window.TradingView) return;
       chartRef.current.innerHTML = "";
       new window.TradingView.widget({
-        autosize: true,
+        autosize: false,
+        height: 400,
+        width: '100%',
         symbol: symbolCode,
         interval: "60",
-        timezone: "Asia/Kolkata",
+        timezone: "Etc/UTC",
         theme: "dark",
-        style: "1",
+        style: "3",
         locale: "en",
         toolbar_bg: "#0f172a",
         enable_publishing: false,
         allow_symbol_change: false,
+        show_volume: false,
         container_id: "tradingview-widget",
       });
     };
@@ -153,7 +176,6 @@ const Dashboards = () => {
   const handleOrder = useCallback(
     async (mode) => {
       if (!selectedStock) return;
-      setStatus("Sending order...");
       try {
         const order = {
           name: selectedStock.name,
@@ -165,12 +187,15 @@ const Dashboards = () => {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
         setOrders((prev) => [{ ...order, id: Date.now(), timestamp: new Date().toISOString() }, ...prev].slice(0, 20));
-        setStatus("Order placed");
+        toast.success(`Order placed: ${mode} ${quantity} ${selectedStock.symbol}`);
+        // Refresh positions and history after order
+        fetchPositions();
+        fetchHistory();
       } catch (err) {
-        setStatus(err.response?.data?.message || "Unable to place order");
+        toast.error(err.response?.data?.message || "Unable to place order");
       }
     },
-    [price, quantity, selectedStock]
+    [price, quantity, selectedStock, fetchPositions, fetchHistory]
   );
 
   const tabContent = useMemo(() => {
@@ -210,25 +235,25 @@ const Dashboards = () => {
             <tr>
               <th>Symbol</th>
               <th>Qty</th>
-              <th>Avg Price</th>
-              <th>Current</th>
-              <th>Day</th>
+              <th>Price</th>
+              <th>Side</th>
+              <th>Time</th>
             </tr>
           </thead>
           <tbody>
             {history.map((item, index) => (
-              <tr key={index}>
+              <tr key={item._id || index}>
                 <td>{item.name}</td>
                 <td>{item.qty}</td>
-                <td>{item.avg?.toFixed(2)}</td>
-                <td>{item.price?.toFixed(2)}</td>
-                <td className={item.isLoss ? "negative" : "positive"}>{item.day}</td>
+                <td>{Number(item.price).toFixed(2)}</td>
+                <td className={item.mode === "BUY" ? "positive" : "negative"}>{item.mode}</td>
+                <td>{item.createdAt ? new Date(item.createdAt).toLocaleString() : "-"}</td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <div className="empty-state">Portfolio history unavailable.</div>
+        <div className="empty-state">No trade history yet. Place a trade to populate history.</div>
       );
     }
 
@@ -264,39 +289,52 @@ const Dashboards = () => {
     <div className="dashboard-root">
       <div className="dashboard-main">
         <section className="panel watchlist-panel">
-          <div className="section-header">
+              <div className="section-header">
             <div>
-              <p className="section-label">Watchlist</p>
               <h2 className="section-title">Live market movers</h2>
             </div>
-            <span className="section-tag">Realtime</span>
+          </div>
+          <div className="asset-filters">
+            {assetFilters.map((filter) => (
+              <button
+                key={filter.id}
+                type="button"
+                className={`asset-filter-button ${assetFilter === filter.id ? "active" : ""}`}
+                onClick={() => setAssetFilter(filter.id)}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
           <div className="watchlist-items">
-            {watchlist.map((stock) => (
+            {filteredWatchlist.map((stock) => (
               <WatchlistItem
-                key={stock.name}
+                key={stock.symbol}
                 stock={stock}
-                active={stock.name === selectedSymbol}
-                onSelect={() => handleSelectStock(stock.name)}
+                active={stock.symbol === selectedSymbol}
+                onSelect={() => handleSelectStock(stock.symbol)}
               />
             ))}
           </div>
         </section>
 
         <section className="panel chart-panel">
+          
+          <div className="chart-container">
+            <div id="tradingview-widget" ref={chartRef} className="chart-frame" />
+          </div>
           <div className="chart-header">
             <div className="stock-details">
-              <p className="stock-label">Market chart</p>
               <div className="stock-summary">
-                <h2 className="stock-name">{selectedStock?.name || "NSE:INFY"}</h2>
-                <span className="stock-price">{selectedStock?.price?.toFixed(2)}</span>
+                <h2 className="stock-name">{selectedStock ? `${selectedStock.symbol} — ${selectedStock.name}` : "AAPL — Apple Inc."}</h2>
+               
               </div>
               <span className={selectedStock?.isDown ? "stock-change negative" : "stock-change positive"}>
-                {selectedStock?.percent}
+                 <span className="stock-price" style={{marginRight:"1rem"}}>{formatUSD(selectedStock?.price)}</span>
+                {selectedStock?.changePercent}
               </span>
             </div>
             <div className="trade-panel">
-              <div className="trade-header">Quick trade</div>
               <label className="trade-label">
                 Qty
                 <input className="trade-input" type="number" min="1" value={quantity} onChange={handleQuantity} />
@@ -309,11 +347,7 @@ const Dashboards = () => {
                 <button type="button" className="trade-button buy" onClick={() => handleOrder("BUY")}>Buy</button>
                 <button type="button" className="trade-button sell" onClick={() => handleOrder("SELL")}>Sell</button>
               </div>
-              <p className="trade-status">{status}</p>
             </div>
-          </div>
-          <div className="chart-container">
-            <div id="tradingview-widget" ref={chartRef} className="chart-frame" />
           </div>
         </section>
 

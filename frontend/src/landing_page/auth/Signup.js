@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import './Auth.css';
 
 const Signup = () => {
@@ -16,11 +17,11 @@ const Signup = () => {
         { email, password }
       );
 
-      alert("Signup successful");
+      toast.success("Signup successful!");
       navigate("/login");
 
     } catch (err) {
-      alert(err.response?.data?.message);
+      toast.error(err.response?.data?.message || "Signup failed");
     }
   };
 
@@ -55,15 +56,7 @@ const Signup = () => {
         </div>
       </div>
       <div className="auth-right bullish">
-        <div className="bull-silhouette"></div>
-        <div className="chart-lines"></div>
-        <div className="candlesticks">
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-          <div className="candlestick"></div>
-        </div>
+      <img src='/media/images/ill1.png' height={800}/>
       </div>
     </div>
   )

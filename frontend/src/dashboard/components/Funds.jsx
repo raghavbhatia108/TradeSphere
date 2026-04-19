@@ -5,7 +5,7 @@ const Funds = () => {
   return (
     <>
       <div className="funds">
-        <p>Instant, zero-cost fund transfers with UPI </p>
+        <p>Instant, global fund transfers with zero fees</p>
         <Link className="btn btn-green">Add funds</Link>
         <Link className="btn btn-blue">Withdraw</Link>
       </div>
@@ -13,7 +13,7 @@ const Funds = () => {
       <div className="row">
         <div className="col">
           <span>
-            <p>Equity</p>
+            <p>Portfolio</p>
           </span>
 
           <div className="table">

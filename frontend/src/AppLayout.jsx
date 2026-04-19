@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./landing_page/Navbar";
 import Footer from "./landing_page/Footer";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import HomePage from "./landing_page/home/HomePage";
 import AboutPage from "./landing_page/about/AboutPage";
@@ -45,6 +47,7 @@ const AppLayout = () => {
       </Routes>
 
       {!isDashboard && <Footer />}
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 };
