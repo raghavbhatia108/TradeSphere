@@ -25,7 +25,6 @@
 }
 
 .section-header,
-.chart-header,
 .tabs-header {
   display: flex;
   justify-content: space-between;
@@ -33,6 +32,17 @@
   gap: 16px;
   padding: 28px 30px;
   max-height: 15vh;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px 20px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .section-label,
@@ -87,7 +97,7 @@
 
 .watchlist-panel {
   position: relative;
-  max-height: 70vh;
+  max-height: 83vh;
  scrollbar-width: none;
 }
 
@@ -151,7 +161,6 @@
 .chart-panel {
   display: flex;
   flex-direction: column;
-  max-height: 70vh;
 }
 
 .stock-details {
@@ -236,15 +245,16 @@
 }
 
 .chart-container {
-  flex: 1;
-  min-height: 0;
+  height: 400px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .chart-frame {
-  flex: 1;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .tabs-panel {
