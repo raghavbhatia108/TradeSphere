@@ -1,4 +1,4 @@
-﻿export const watchlist = [
+export const watchlist = [
   {
     symbol: "AAPL",
     name: "Apple Inc.",

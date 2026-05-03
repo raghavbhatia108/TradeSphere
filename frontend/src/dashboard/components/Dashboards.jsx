@@ -46,7 +46,6 @@ const Dashboards = () => {
   const [activeTab, setActiveTab] = useState("orders");
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(initialWatchlist[0]?.price || 0);
-  const [status, setStatus] = useState("");
   const chartRef = useRef(null);
 
   const filteredWatchlist = useMemo(
@@ -162,7 +161,6 @@ const Dashboards = () => {
   const handleSelectStock = useCallback((symbol) => {
     setSelectedSymbol(symbol);
     setActiveTab("positions");
-    setStatus("");
   }, []);
 
   const handleQuantity = useCallback((event) => {

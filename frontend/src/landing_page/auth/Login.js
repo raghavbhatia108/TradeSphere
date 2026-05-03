@@ -55,7 +55,7 @@ const Login = () => {
         </div>
       </div>
       <div className="auth-right bearish">
-      <img src='/media/images/ill2.png' height={800}/>
+      <img src='/media/images/ill2.png' height={800} alt="" />
         
         </div>
     </div>

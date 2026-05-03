@@ -3,7 +3,6 @@ import './OpenAccount.css'
 import { Link } from 'react-router-dom'
 
 const OpenAccount = () => {
-  const token = localStorage.getItem("token");
   return (
     <section className="open-account-section">
       <div className="open-account-container">

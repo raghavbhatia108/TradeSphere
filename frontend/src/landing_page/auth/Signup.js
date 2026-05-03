@@ -56,7 +56,7 @@ const Signup = () => {
         </div>
       </div>
       <div className="auth-right bullish">
-      <img src='/media/images/ill1.png' height={800}/>
+      <img src='/media/images/ill1.png' height={800} alt="" />
       </div>
     </div>
   )
