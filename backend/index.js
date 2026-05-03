@@ -14,18 +14,11 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
-const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:3000").split(",").map(o => o.trim());
-
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, Postman, curl)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: "https://trade-sphere-one.vercel.app",
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(bodyParser.json());
