@@ -16,10 +16,10 @@ function Hero() {
             className="search-input" 
           />
           <div className="quick-links">
-            <a href="#">Account Setup</a>
-            <a href="#">Trading Guide</a>
-            <a href="#">Portfolio Help</a>
-            <a href="#">Security</a>
+            <button type="button">Account Setup</button>
+            <button type="button">Trading Guide</button>
+            <button type="button">Portfolio Help</button>
+            <button type="button">Security</button>
           </div>
         </div>
       </div>

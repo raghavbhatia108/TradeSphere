@@ -46,7 +46,7 @@ export const Icon = ({ emoji, className = 'icon', size = '20px' }) => {
  * Returns string with emoji replaced or null if no emoji found
  */
 export const replaceEmoji = (text) => {
-  for (const [emoji, iconClass] of Object.entries(iconMap)) {
+  for (const emoji of Object.keys(iconMap)) {
     if (text.includes(emoji)) {
       return text.replace(emoji, '').trim();
     }

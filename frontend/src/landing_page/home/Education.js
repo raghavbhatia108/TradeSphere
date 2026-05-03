@@ -40,7 +40,7 @@ const Education = () => {
               </div>
               <h3>{course.title}</h3>
               <p>{course.description}</p>
-              <a href="#" className="learn-link">{course.link}</a>
+              <button type="button" className="learn-link">{course.link}</button>
             </div>
           ))}
         </div>

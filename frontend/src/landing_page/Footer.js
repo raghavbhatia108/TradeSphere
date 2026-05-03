@@ -15,32 +15,32 @@ const Footer = () => {
           <div className="footer-column">
             <p className="column-title">Company</p>
             <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Products</a></li>
-              <li><a href="#">Pricing</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><button type="button">About Us</button></li>
+              <li><button type="button">Products</button></li>
+              <li><button type="button">Pricing</button></li>
+              <li><button type="button">Careers</button></li>
+              <li><button type="button">Blog</button></li>
             </ul>
           </div>
           
           <div className="footer-column">
             <p className="column-title">Support</p>
             <ul>
-              <li><a href="#">Help Center</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Status Page</a></li>
-              <li><a href="#">API Docs</a></li>
-              <li><a href="#">Community</a></li>
+              <li><button type="button">Help Center</button></li>
+              <li><button type="button">Contact Us</button></li>
+              <li><button type="button">Status Page</button></li>
+              <li><button type="button">API Docs</button></li>
+              <li><button type="button">Community</button></li>
             </ul>
           </div>
           
           <div className="footer-column">
             <p className="column-title">Account</p>
             <ul>
-              <li><a href="#">Sign In</a></li>
-              <li><a href="#">Open Account</a></li>
-              <li><a href="#">Fund Transfer</a></li>
-              <li><a href="#">Security</a></li>
+              <li><button type="button">Sign In</button></li>
+              <li><button type="button">Open Account</button></li>
+              <li><button type="button">Fund Transfer</button></li>
+              <li><button type="button">Security</button></li>
             </ul>
           </div>
         </div>
@@ -54,7 +54,7 @@ const Footer = () => {
             Identity verification is a one-time process with any regulated broker. Your information is protected with bank-grade security.
           </p>
           <p className="footer-copyright">
-            TradeSphere © 2026. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            TradeSphere © 2026. All rights reserved. | <button type="button">Privacy Policy</button> | <button type="button">Terms of Service</button>
           </p>
         </div>
       </div>
