@@ -7,7 +7,7 @@ const Hero = () => {
       <div className="products-hero-container">
         <h1>Powerful trading tools designed for you</h1>
         <p>Experience professional-grade platforms built for every trader</p>
-        <a href="#" className="cta-primary">Explore Our Products</a>
+        <button type="button" className="cta-primary">Explore Our Products</button>
       </div>
     </section>
   )
